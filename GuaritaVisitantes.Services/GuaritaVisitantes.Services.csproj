@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DCC76B06-2AC6-4E09-A330-331451D7CFA3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GuaritaVisitantes.Services</RootNamespace>
+    <AssemblyName>GuaritaVisitantes.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interfaces\IEntradasSaidasService.cs" />
+    <Compile Include="Interfaces\IMotoristaService.cs" />
+    <Compile Include="Interfaces\INotificationService.cs" />
+    <Compile Include="Interfaces\IReportService.cs" />
+    <Compile Include="Interfaces\ISaidasEntradasService.cs" />
+    <Compile Include="Interfaces\IService.cs" />
+    <Compile Include="Interfaces\IVeiculoService.cs" />
+    <Compile Include="Interfaces\IVeiculoVisitanteService.cs" />
+    <Compile Include="Interfaces\IVisitanteService.cs" />
+    <Compile Include="Models\EntradasSaidasService.cs" />
+    <Compile Include="Models\MotoristaService.cs" />
+    <Compile Include="Models\NotificationService.cs" />
+    <Compile Include="Models\ReportService.cs" />
+    <Compile Include="Models\SaidasEntradasService.cs" />
+    <Compile Include="Models\VeiculoService.cs" />
+    <Compile Include="Models\VeiculoVisitanteService.cs" />
+    <Compile Include="Models\VisitanteService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GuaritaVisitantes.DAL\GuaritaVisitantes.DAL.csproj">
+      <Project>{5c58068c-26cf-4e55-8f39-45f7f0610bf3}</Project>
+      <Name>GuaritaVisitantes.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GuaritaVisitantes.DTO\GuaritaVisitantes.DTO.csproj">
+      <Project>{04748d44-1f9a-44d9-b58a-8c22d8898ccf}</Project>
+      <Name>GuaritaVisitantes.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GuaritaVisitantes.Entities\GuaritaVisitantes.Entities.csproj">
+      <Project>{ee38894a-fdad-4451-a920-fc8ec778434e}</Project>
+      <Name>GuaritaVisitantes.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GuaritaVisitantes.Reports\GuaritaVisitantes.Reports.csproj">
+      <Project>{D380BC0C-7885-4B58-B04B-3B7C99888E50}</Project>
+      <Name>GuaritaVisitantes.Reports</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

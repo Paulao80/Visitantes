@@ -1,0 +1,104 @@
+﻿@model GuaritaVisitantes.DTO.Models.VisitanteDTO
+
+@{
+    ViewBag.Title = "Adicionar Visitante";
+}
+
+<style>
+    .card-body-item .capturar #video-foto{
+        width: calc(50% - 4px);
+        border: 3px solid black;
+        border-radius: 5px;
+    }
+
+    .card-body-item .capturar #canvas-foto {
+        width: calc(50% - 4px);
+        border-radius: 5px;
+    }
+
+    .btns-visitante {
+        width: calc(50% - 4px);
+        background-color: orangered;
+        border: none;
+        padding: 5px;
+        color: white;
+        border-radius: 5px;
+        display: inline-block;
+    }
+</style>
+
+    <div class="card">
+        <div class="card-title">
+            @ViewBag.Title
+        </div>
+
+        <div class="card-body">
+            @using (Html.BeginForm("Create", "Visitantes", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data", id = "FormAddVisitante" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="card-body-item">
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                </div>
+
+                <div class="card-body-item">
+                    @Html.LabelFor(m => m.Nome, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="card-body-item">
+                    @Html.LabelFor(m => m.Telefone, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="card-body-item">
+                    @Html.LabelFor(m => m.CnhRg, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.CnhRg, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CnhRg, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="card-body-item">
+                    @Html.LabelFor(m => m.CnhRgFile, new { @class = "control-label" })
+                    <input class="form-control foto" id="CnhRgFile" name="CnhRgFile" type="file" accept=".jpg, .jpeg, .png" />
+                    <div id="imgdiv1"></div>
+                </div>
+
+                @*<div class="card-body-item">
+                    @Html.LabelFor(m => m.FotoFile, new { @class = "control-label" })
+                    <input class="form-control foto" id="FotoFile" name="FotoFile" type="file" accept=".jpg, .jpeg, .png" />
+                    <div id="imgdiv2"></div>
+                </div>*@
+
+                <div class="card-body-item">
+                    @Html.LabelFor(m => m.FotoPath, new { @class = "control-label" })
+                    @Html.HiddenFor(m => m.FotoPath)
+                    <div class="capturar">
+                        <video id="video-foto"></video>
+                        <canvas id='canvas-foto'></canvas>
+                    </div>
+                </div>
+
+                <div class="card-body-item">
+                    <input class="btns-visitante" type="button" id="btnCapturar" value="Capturar" />
+                    <input class="btns-visitante" style="display: none;" type="button" id="btnUpload" value="Salvar" />
+                </div>
+            }
+        </div>
+
+        <div class="card-footer">
+            <input id="btnAddVisitante" type="button" class="btn btn-success" value="Salvar" />
+        </div>
+    </div>
+<br />
+<br />
+<br />
+<br />
+
+    <script>
+        let btnAddVisitante = document.getElementById('btnAddVisitante');
+        btnAddVisitante.onclick = () => {
+            document.getElementById('FormAddVisitante').submit();
+        }
+    </script>
+    <script src="~/Scripts/visitante.js"></script>

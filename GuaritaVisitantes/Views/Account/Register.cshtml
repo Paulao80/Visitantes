@@ -1,0 +1,93 @@
+﻿@model GuaritaVisitantes.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Registrar Usuário";
+}
+
+
+
+<div class="card">
+    <div class="card-title">
+        @ViewBag.Title
+    </div>
+
+    <div class="card-body">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data", id = "FormRegUsuario" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.NomeCompleto, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.NomeCompleto, new { @class = "form-control" })
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.Foto, new { @class = "control-label" })
+                <input class="form-control foto" id="Foto" name="Foto" type="file" accept=".jpg, .jpeg, .png" />
+                <div id="imgdiv"></div>
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        }
+    </div>
+
+    <div class="card-footer">
+        <input id="RegistrarSubmit" type="button" class="btn btn-success" value="Salvar" />
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    let btnRegistrar = document.getElementById('RegistrarSubmit');
+    btnRegistrar.onclick = () => {
+        document.getElementById('FormRegUsuario').submit();
+    }
+
+    //let iptRegFoto = document.getElementById('Foto');
+    //iptRegFoto.onchange = (e) => {
+    //    let div = document.getElementById('imgdiv');
+    //    div.innerHTML = '';
+    //    div.setAttribute('class', '');
+    //    div.style.marginTop = '10px';
+    //    div.style.backgroundColor = '#e1e1e1';
+    //    div.style.border = '2px solid #4a4a4a';
+    //    div.style.textAlign = 'center';
+
+    //    if (!(e.target.files[0] == undefined)) {
+    //        let img = document.createElement('img');
+    //        img.setAttribute('id', 'fotoimg');
+    //        img.setAttribute('name', 'fotoimg');
+    //        img.style.width = '120px';
+
+    //        let selectedFile = e.target.files[0];
+
+    //        let reader = new FileReader();
+
+    //        img.title = selectedFile.name;
+
+    //        reader.onload = (e1) => {
+    //            img.src = e1.target.result;
+    //        }
+
+    //        reader.readAsDataURL(selectedFile);
+
+    //        div.append(img);
+    //    }
+    //}
+</script>

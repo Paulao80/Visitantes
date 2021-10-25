@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{34EB36EB-E661-432D-894B-F7A5BEE503BC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GuaritaVisitantes.IoC</RootNamespace>
+    <AssemblyName>GuaritaVisitantes.IoC</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonServiceLocator.NinjectAdapter.Unofficial, Version=3.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.NinjectAdapter.Unofficial.3.2.2.0\lib\Net40\CommonServiceLocator.NinjectAdapter.Unofficial.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configs\AutoMapperModule.cs" />
+    <Compile Include="Configs\ReportAllGuaritaNinjectModule.cs" />
+    <Compile Include="Configs\ReportAllTransporteNinjectModule.cs" />
+    <Compile Include="Configs\ReportEntradaGuaritaNinjectModule.cs" />
+    <Compile Include="Configs\ReportEntradaTransporteNinjectModule.cs" />
+    <Compile Include="Configs\ReportSaidaTransporteNinjectModule.cs" />
+    <Compile Include="Configs\ReportServiceNinjectModule.cs" />
+    <Compile Include="Configs\RepositoryEntradasSaidasNinjectModule.cs" />
+    <Compile Include="Configs\RepositoryMotoristaNinjectModule.cs" />
+    <Compile Include="Configs\RepositoryNotificationNinjectModule.cs" />
+    <Compile Include="Configs\RepositoryVeiculoNinjectModule.cs" />
+    <Compile Include="Configs\RepositoryVeiculoVisitanteNinjectModule.cs" />
+    <Compile Include="Configs\RepositoryVisitanteNinjectModule.cs" />
+    <Compile Include="Configs\ReportSaidaGuaritaNinjectModule.cs" />
+    <Compile Include="Configs\ServiceEntradasSaidasNinjectModule.cs" />
+    <Compile Include="Configs\ServiceMotoristaNinjectModule.cs" />
+    <Compile Include="Configs\ServiceNotificationNinjectModule.cs" />
+    <Compile Include="Configs\RepositorySaidasEntradasNinjectModule.cs" />
+    <Compile Include="Configs\ServiceSaidasEntradasNinjectModule.cs" />
+    <Compile Include="Configs\ServiceVeiculoNinjectModule.cs" />
+    <Compile Include="Configs\ServiceVeiculoVisitanteNinjectModule.cs" />
+    <Compile Include="Configs\ServiceVisitanteNinjectModule.cs" />
+    <Compile Include="IoCGuaritaVisitantes.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GuaritaVisitantes.DAL\GuaritaVisitantes.DAL.csproj">
+      <Project>{5c58068c-26cf-4e55-8f39-45f7f0610bf3}</Project>
+      <Name>GuaritaVisitantes.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GuaritaVisitantes.Mappers\GuaritaVisitantes.Mappers.csproj">
+      <Project>{ced346f3-2fed-405d-a9c1-236fafac2e2b}</Project>
+      <Name>GuaritaVisitantes.Mappers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GuaritaVisitantes.Reports\GuaritaVisitantes.Reports.csproj">
+      <Project>{D380BC0C-7885-4B58-B04B-3B7C99888E50}</Project>
+      <Name>GuaritaVisitantes.Reports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GuaritaVisitantes.Services\GuaritaVisitantes.Services.csproj">
+      <Project>{dcc76b06-2ac6-4e09-a330-331451d7cfa3}</Project>
+      <Name>GuaritaVisitantes.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

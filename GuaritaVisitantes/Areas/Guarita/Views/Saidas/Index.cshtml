@@ -1,0 +1,74 @@
+﻿@model IEnumerable<GuaritaVisitantes.DTO.Models.EntradasSaidasDTO>
+
+@{
+    ViewBag.Title = "Saídas";
+}
+
+<link href="~/Content/IndexLista.css" rel="stylesheet" />
+
+<div class="card">
+    <div class="card-title">
+        @ViewBag.Title
+    </div>
+
+    <div class="card-body">
+        <div id="table_div">
+            <form action="/Guarita/Saidas/Deletar" id="tabela01" method="post">
+                <table id="table_data" class="display">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Id</th>
+                            <th>Data</th>
+                            <th>Entrada</th>
+                            <th>Visitante</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td><input type="checkbox" name="ID" value="@item.EntradasSaidasId"></td>
+                                    <td>@item.EntradasSaidasId</td>
+                                    <td>@item.Data</td>
+                                    <td>@item.EntradaId</td>
+                                    <td>@item.Visitante.Nome</td>
+                                    <td>
+                                        <a class="btn btn-warning" href="/Guarita/Saidas/Edit/@item.EntradasSaidasId"><i class="fas fa-pencil-alt"></i></a>
+                                        <a class="btn btn-primary" href="/Guarita/Saidas/Details/@item.EntradasSaidasId"><i class="fa fa-list"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+
+    <div class="card-footer">
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<div id="avisoDelete" class="aviso-del" style="display: none">
+    <div class="aviso-title">
+        <h1>Excluir</h1>
+    </div>
+    <div class="aviso-body">
+        <p>Tem certeza que deseja excluir esses itens?</p>
+    </div>
+    <div class="aviso-footer">
+        <button class="btn-aviso btn-aviso-sim">Sim</button>
+        <button class="btn-aviso btn-aviso-nao">Não</button>
+    </div>
+</div>
+
+<a class="btns btn-add" href="/Guarita/Saidas/Create"><i class="fas fa-plus"></i></a>
+<button class="btns btn-del"><i class="fas fa-trash-alt"></i></button>
+
+<script src="~/Scripts/IndexLista.js"></script>

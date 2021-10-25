@@ -1,0 +1,54 @@
+﻿@model GuaritaVisitantes.DTO.Models.EntradasSaidasDTO
+
+@{
+    ViewBag.Title = "Adicionar Saída";
+}
+
+<div class="card">
+
+    <div class="card-title">
+        @ViewBag.Title
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("Create", "Saidas", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data", id = "FormAddSaida" }))
+        {
+            @Html.AntiForgeryToken()
+            @*<div class="card-body-item">
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+            </div>*@
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.Observacoes, new { @class = "control-label" })
+                <textarea class="form-control" name="Observacoes" id="Observacoes"></textarea>
+                @Html.ValidationMessageFor(model => model.Observacoes, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.EntradaId, new { @class = "control-label" })
+                <select class="form-control select-entrada" name="EntradaId" id="EntradaId">
+                    <option></option>
+                </select>
+                @Html.ValidationMessageFor(model => model.EntradaId, "", new { @class = "text-danger" })
+            </div>
+
+            @*<div class="card-body-item">
+                @Html.LabelFor(m => m.VisitanteId, new { @class = "control-label" })
+                <select class="form-control select-visitante" name="VisitanteId" id="VisitanteId">
+                    <option></option>
+                </select>
+                @Html.ValidationMessageFor(model => model.VisitanteId, "", new { @class = "text-danger" })
+            </div>*@
+        }
+    </div>
+    <div class="card-footer">
+        <input id="btnAddSaida" type="button" class="btn btn-success" value="Salvar" />
+    </div>
+
+</div>
+
+<script>
+    let btnAddSaida = document.getElementById('btnAddSaida');
+    btnAddSaida.onclick = () => {
+        document.getElementById('FormAddSaida').submit();
+    }
+</script>

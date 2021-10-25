@@ -1,0 +1,96 @@
+﻿.notification-menu {
+    width: 300px;
+    height: 65vh;
+    background-color: #5b5b5b;
+    color: white;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    transition: all 0.5s ease;
+    z-index: 4;
+}
+
+.notification-show {
+    right: 5px;
+}
+
+.notification-none{
+    right: calc(-100% - 20px);
+}
+
+.menu-title {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #828282;
+    height: 52px;
+    box-sizing: border-box;
+}
+
+.menu-title h1{
+    margin: 0;
+    font-size: 28px;
+}
+
+.menu-itens{
+    width: 100%;
+    height: calc(100% - 52px);
+    overflow-y: auto;
+}
+
+.menu-item {
+    padding: 10px;
+    border-bottom: 2px solid #828282;
+    cursor: pointer;
+}
+
+.menu-item:hover{
+    background-color: #828282;
+}
+
+.menu-item-icon{
+    display: inline-block;
+    font-size: 35px;
+    margin-right: 10px;
+}
+
+.menu-item-body {
+    display: inline-block;
+    width: calc(100% - 49px);
+    text-align: center;
+}
+
+.menu-item-body span{
+    display: block;
+}
+
+.menu-item-date{
+    font-size: 12px;
+}
+
+#notAviso{
+    position: absolute;
+    right: 13px;
+    top: 28px;
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.aviso-none{
+    display: none;
+}
+
+.aviso-show{
+    display: inline-block;
+}
+
+@media screen and (max-width: 299px) {
+
+    .notification-menu{
+        width: 250px;
+    }
+}

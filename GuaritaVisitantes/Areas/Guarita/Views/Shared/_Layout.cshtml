@@ -1,0 +1,126 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Guarita</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="https://kit.fontawesome.com/d9a4a09875.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/Content/Select2/select2.css" />
+    <link rel="stylesheet" href="~/Content/Select2/select2-bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/DataTable/datatables.css" />
+    <link rel="stylesheet" href="~/Content/Notification.css" />
+</head>
+<body>
+
+    @if (Request.IsAuthenticated)
+    {
+        <header>
+            <nav>
+                <div id="logo-nav" class="logo reponsive-none">
+                    <a href="@Url.Action("Index", "Home", new { area = "" })"><img src="~/Content/img/logotradicao.png" /> <span>Guarita</span></a>
+                </div>
+                <button id="btnHamb" class="btnHamb btn-off"><i class="fas fa-bars"></i></button>
+                <button id="btnNoti" class="btnNoti"><i class="fas fa-bell"></i></button>
+                <div class="aviso-none" id="notAviso"></div>
+            </nav>
+        </header>
+
+        <aside class="reponsive-none" id="menu-lateral">
+
+            <div class="account">
+                <div class="user-img">
+                    <img id="UserImagem" src="~/Content/img/users.png" alt="User" />
+                </div>
+                <h4 id="UserNome" class="name">
+                    @User.Identity.GetUserName().Split('@')[0]
+                </h4>
+                <a href="@Url.Action("Index", "Manage", new { area = "" })">Gerenciar</a>
+                @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "login-bar" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <a href="javascript:document.getElementById('logoutForm').submit()">Sair</a>
+                }
+            </div>
+
+            <div class="menu-aside">
+                <ul>
+                    <li>
+                        <a href="@Url.Action("Index", "Home", new { area = "Guarita" })">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "VeiculoVisitantes", new { area = "Guarita" })">
+                            <i class="fas fa-truck"></i>
+                            <span>Veiculos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Visitantes", new { area = "Guarita" })">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Visitantes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Entradas", new { area = "Guarita" })">
+                            <i class="fas fa-arrow-circle-right"></i>
+                            <span>Entradas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Saidas", new { area = "Guarita" })">
+                            <i class="fas fa-arrow-circle-left"></i>
+                            <span>Saidas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Relatorio", new { area = "Guarita" })">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>Relatórios</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </aside>
+
+        <main>
+            <div class="notification-menu notification-none" id="menuNotification">
+                <div class="menu-title">
+                    <h1>Notificações</h1>
+                </div>
+                <div id="NotMenuItens" class="menu-itens">
+                </div>
+            </div>
+
+            @RenderBody()
+        </main>
+        <footer>
+            <p>©@DateTime.Now.Year - Departamento de Tecnologia Tradição Alimentos</p>
+        </footer>
+    }
+    else
+    {
+        @RenderBody()
+    }
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/Select2/select2.min.js"></script>
+
+    @if (Request.IsAuthenticated)
+    {
+        <script src="~/Scripts/DataTable/datatables.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/main.js"></script>
+        <script type="text/javascript" src="~/Scripts/Notification.js"></script>
+    }
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

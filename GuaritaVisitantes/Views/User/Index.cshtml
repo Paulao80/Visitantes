@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Usuários";
+}
+
+<div class="cartao-bg-white">
+    <div class="cartao-title">
+        <h1>
+            @ViewBag.Title
+        </h1>
+    </div>
+    <div class="div-btn" onclick="window.location.href = '@Url.Action("Register", "Account", new { area = "" })';">
+        <i class="fas fa-user-plus"></i>
+        <span>Registro</span>
+    </div>
+    <div class="div-btn" onclick="window.location.href = '@Url.Action("SetPassword", "Manage", new { area = "" })';">
+        <i class="fas fa-lock"></i>
+        <span>Mudar Senha</span>
+    </div>
+    <div class="div-btn" onclick="window.location.href = '@Url.Action("Index", "Papel", new { area = "" })';">
+        <i class="fas fa-copy"></i>
+        <span>Papéis</span>
+    </div>
+    <div>
+        <p class="text-success">@ViewBag.StatusMessage</p>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+

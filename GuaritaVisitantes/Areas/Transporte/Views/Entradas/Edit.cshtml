@@ -1,0 +1,70 @@
+﻿@model GuaritaVisitantes.DTO.Models.SaidasEntradasDTO
+
+@{
+    ViewBag.Title = "Editar Entrada";
+}
+
+<style>
+    .validation-summary-errors ul {
+        list-style-position: inside;
+    }
+</style>
+
+<div class="card">
+
+    <div class="card-title">
+        @ViewBag.Title
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("Edit", "Entradas", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data", id = "FormEdtEntrada" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="card-body-item">
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+            </div>
+
+            @Html.HiddenFor(m => m.SaidaEntradaId)
+            @Html.HiddenFor(m => m.Tipo)
+            @Html.HiddenFor(m => m.Data)
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.KM, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.KM, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.KM, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.Observacoes, new { @class = "control-label" })
+                <textarea class="form-control" name="Observacoes" id="Observacoes"></textarea>
+                @Html.ValidationMessageFor(model => model.Observacoes, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.HiddenFor(m => m.VeiculoId)
+            @Html.HiddenFor(m => m.MotoristaId)
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.SaidaId, new { @class = "control-label" })
+                <select class="form-control select-saida-trans" name="SaidaId" id="SaidaId">
+                    <option></option>
+                </select>
+                @Html.ValidationMessageFor(model => model.SaidaId, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.HiddenFor(m => m.UserId)
+        }
+    </div>
+    <div class="card-footer">
+        <input id="btnEdtEntrada" type="button" class="btn btn-success" value="Salvar" />
+    </div>
+
+</div>
+
+<script>
+    let txtObservacoes = document.getElementById('Observacoes');
+    txtObservacoes.value = '@Model.Observacoes';
+
+    let btnEdtEntrada = document.getElementById('btnEdtEntrada');
+    btnEdtEntrada.onclick = () => {
+        document.getElementById('FormEdtEntrada').submit();
+    }
+</script>

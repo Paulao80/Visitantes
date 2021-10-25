@@ -1,0 +1,66 @@
+﻿@model GuaritaVisitantes.DTO.Models.SaidasEntradasDTO
+
+@{
+    ViewBag.Title = "Adicionar Entrada";
+}
+
+<style>
+    .validation-summary-errors ul {
+        list-style-position: inside;
+    }
+</style>
+
+<div class="card">
+
+    <div class="card-title">
+        @ViewBag.Title
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("Create", "Entradas", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data", id = "FormAddEntrada" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="card-body-item">
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.KM, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.KM, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.KM, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.Observacoes, new { @class = "control-label" })
+                <textarea class="form-control" name="Observacoes" id="Observacoes"></textarea>
+                @Html.ValidationMessageFor(model => model.Observacoes, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.SaidaId, new { @class = "control-label" })
+                <select class="form-control select-saida-trans" name="SaidaId" id="SaidaId">
+                    <option></option>
+                </select>
+                @Html.ValidationMessageFor(model => model.SaidaId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.MotoristaId, new { @class = "control-label" })
+                <select class="form-control select-motorista" name="MotoristaId" id="MotoristaId" style="width: 100%;">
+                    <option></option>
+                </select>
+                @Html.ValidationMessageFor(model => model.MotoristaId, "", new { @class = "text-danger" })
+            </div>
+        }
+    </div>
+    <div class="card-footer">
+        <input id="btnAddEntrada" type="button" class="btn btn-success" value="Salvar" />
+    </div>
+
+</div>
+
+<script>
+    let btnAddEntrada = document.getElementById('btnAddEntrada');
+    btnAddEntrada.onclick = () => {
+        document.getElementById('FormAddEntrada').submit();
+    }
+</script>

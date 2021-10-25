@@ -1,0 +1,49 @@
+﻿@model GuaritaVisitantes.DTO.Models.EntradasSaidasDTO
+
+@{
+    ViewBag.Title = "Detailhes da Saída";
+}
+
+<div class="card">
+    <div class="card-title">
+        @ViewBag.Title
+    </div>
+    <div class="card-body">
+        <div class="card-body-item">
+            @Html.LabelFor(m => m.Tipo, new { @class = "control-label" }):
+            @Html.DisplayFor(m => m.Tipo)
+        </div>
+
+        <div class="card-body-item">
+            @Html.LabelFor(m => m.Data, new { @class = "control-label" }):
+            @Html.DisplayFor(m => m.Data)
+        </div>
+
+        <div class="card-body-item">
+            @Html.LabelFor(m => m.Observacoes, new { @class = "control-label" }):
+            @Html.DisplayFor(m => m.Observacoes)
+        </div>
+
+        <div class="card-body-item">
+            @Html.LabelFor(m => m.EntradaId, new { @class = "control-label" }):
+            @Html.DisplayFor(m => m.EntradaId)
+        </div>
+
+        <div class="card-body-item">
+            @Html.LabelFor(m => m.VisitanteId, new { @class = "control-label" }):
+            @Html.DisplayFor(m => m.Visitante.Nome)
+        </div>
+
+        @{
+            var veiculo = Model.VeiculoVisitante.Placa + " - " + Model.VeiculoVisitante.Descricao;
+        }
+
+        <div class="card-body-item">
+            @Html.LabelFor(m => m.VeiculoId, new { @class = "control-label" }):
+            @veiculo
+        </div>
+    </div>
+    <div class="card-footer">
+    </div>
+</div>
+

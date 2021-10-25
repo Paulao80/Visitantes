@@ -1,0 +1,48 @@
+﻿@model GuaritaVisitantes.DTO.Models.MotoristaDTO
+
+@{
+    ViewBag.Title = "Editar Motorista";
+}
+
+<div class="card">
+    <div class="card-title">
+        @ViewBag.Title
+    </div>
+
+    <div class="card-body">
+        @using (Html.BeginForm("Edit", "Motoristas", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data", id = "FormEdtMotorista" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="card-body-item">
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+            </div>
+
+            @Html.HiddenFor(m => m.MotoristaId)
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.Nome, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.CnhRg, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.CnhRg, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CnhRg, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.HiddenFor(m => m.UserId)
+        }
+    </div>
+
+    <div class="card-footer">
+        <input id="btnEdtMotorista" type="button" class="btn btn-success" value="Salvar" />
+    </div>
+</div>
+
+<script>
+    let btnEdtMotorista = document.getElementById('btnEdtMotorista');
+    btnEdtMotorista.onclick = () => {
+        document.getElementById('FormEdtMotorista').submit();
+    }
+</script>

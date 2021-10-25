@@ -1,0 +1,23 @@
+﻿@model GuaritaVisitantes.Models.IndexViewModel
+@{
+    ViewBag.Title = "Gerenciar";
+}
+
+<div class="cartao-bg-white">
+    <div class="cartao-title">
+        <h1>
+            @ViewBag.Title
+        </h1>
+    </div>
+    <div class="div-btn" onclick="window.location.href = '@Url.Action("ChangePhoto", "Manage", new { area = "" })';">
+        <i class="fas fa-camera"></i>
+        <span>Mudar Foto</span>
+    </div>
+    <div class="div-btn" onclick="window.location.href = '@Url.Action("ChangePassword", "Manage", new { area = "" })';">
+        <i class="fas fa-lock"></i>
+        <span>Mudar Senha</span>
+    </div>
+    <div>
+        <p class="text-success">@ViewBag.StatusMessage</p>
+    </div>
+</div>

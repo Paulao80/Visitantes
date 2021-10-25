@@ -1,0 +1,54 @@
+﻿@model GuaritaVisitantes.DTO.Models.EntradasSaidasDTO
+
+@{
+    ViewBag.Title = "Adicionar Entrada";
+}
+
+<div class="card">
+
+    <div class="card-title">
+        @ViewBag.Title
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("Create", "Entradas", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data", id = "FormAddEntrada" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="card-body-item">
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.Observacoes, new { @class = "control-label" })
+                <textarea class="form-control" name="Observacoes" id="Observacoes"></textarea>
+                @Html.ValidationMessageFor(model => model.Observacoes, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.VisitanteId, new { @class = "control-label" })
+                <select class="form-control select-visitante" name="VisitanteId" id="VisitanteId">
+                    <option></option>
+                </select>
+                @Html.ValidationMessageFor(model => model.VisitanteId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.VeiculoId, new { @class = "control-label" })
+                <select class="form-control select-veiculo-visitante" name="VeiculoId" id="VeiculoId">
+                    <option></option>
+                </select>
+                @Html.ValidationMessageFor(model => model.VeiculoId, "", new { @class = "text-danger" })
+            </div>
+        }
+    </div>
+    <div class="card-footer">
+        <input id="btnAddEntrada" type="button" class="btn btn-success" value="Salvar" />
+    </div>
+
+</div>
+
+<script>
+    let btnAddEntrada = document.getElementById('btnAddEntrada');
+    btnAddEntrada.onclick = () => {
+        document.getElementById('FormAddEntrada').submit();
+    }
+</script>

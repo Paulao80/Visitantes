@@ -1,0 +1,51 @@
+﻿@model GuaritaVisitantes.DTO.Models.VisitanteDTO
+
+@{
+    ViewBag.Title = "Detalhes do Visitante";
+}
+    <style>
+        .img-visitante{
+            display: block;
+            width: 50%;
+            border: 3px solid black;
+            border-radius: 10px;
+        }
+    </style>
+
+    <div class="card">
+        <div class="card-title">
+            @ViewBag.Title
+        </div>
+
+        <div class="card-body">
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.Nome, new { @class = "control-label" }):
+                @Html.DisplayFor(m => m.Nome)
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.Telefone, new { @class = "control-label" }):
+                @Html.DisplayFor(m => m.Telefone)
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.CnhRg, new { @class = "control-label" }):
+                @Html.DisplayFor(m => m.CnhRg)
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.CnhRgFile, new { @class = "control-label" }):
+                <img src="@Model.CnhRgPath" class="img-visitante" />
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.FotoPath, new { @class = "control-label" }):
+                <img src="@Model.FotoPath" class="img-visitante" />
+            </div>
+
+        </div>
+
+        <div class="card-footer">      
+        </div>
+    </div>

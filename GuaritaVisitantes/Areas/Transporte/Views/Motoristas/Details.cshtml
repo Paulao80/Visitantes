@@ -1,0 +1,33 @@
+﻿@model GuaritaVisitantes.DTO.Models.MotoristaDTO
+
+@{
+    ViewBag.Title = "Detalhes do Motorista";
+}
+
+<div class="card">
+    <div class="card-title">
+        @ViewBag.Title
+    </div>
+
+    <div class="card-body">
+
+        <div class="card-body-item">
+            @Html.LabelFor(m => m.Nome, new { @class = "control-label" }):
+            @Html.DisplayFor(m => m.Nome)
+        </div>
+
+        <div class="card-body-item">
+            @Html.LabelFor(m => m.CnhRg, new { @class = "control-label" }):
+            @Html.DisplayFor(m => m.CnhRg)
+        </div>
+
+        <div class="card-body-item">
+            @Html.LabelFor(m => m.UserId, new { @class = "control-label" }):
+            @ViewBag.Usuario
+        </div>
+
+    </div>
+
+    <div class="card-footer">
+    </div>
+</div>

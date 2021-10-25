@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+
+<link href="~/Content/IndexLista.css" rel="stylesheet" />
+
+<div class="cartao-bg-white">
+    <div class="cartao-title">
+        <h1>
+            @ViewBag.Title
+        </h1>
+    </div>
+    <div class="static static-entradas">
+        <span class="static-title">Entradas</span>
+        <span class="static-quant">@ViewBag.entradas</span>
+        <i class="fas fa-arrow-circle-right" aria-hidden="true"></i>
+    </div>
+
+    @{
+        var visitantes = (List<GuaritaVisitantes.DTO.Models.EntradasSaidasDTO>)ViewBag.visitantes;
+    }
+
+    <div class="static static-visitantes">
+        <span class="static-title">Visitantes</span>
+        <span class="static-quant">@visitantes.Count()</span>
+        <i class="fas fa-user-tie" aria-hidden="true"></i>
+    </div>
+
+    <div class="static static-saidas">
+        <span class="static-title">Saidas</span>
+        <span class="static-quant">@ViewBag.saidas</span>
+        <i class="fas fa-arrow-circle-left" aria-hidden="true"></i>
+    </div>
+
+    <div class="table-visitantes">
+        <h1>Visitantes</h1>
+        <table id="table_data" class="display" data-searching="false" data-paging="false" data-scroll-y="277" data-scroll-Collapse="true">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Visitante</th>
+                    <th>Hora da Entrada</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var item in visitantes)
+                    {
+                        <tr>
+                            <td><img class="img-perfil" src="@GuaritaVisitantes.Util.Converter.FileToData(item.Visitante.FotoPath)" /></td>
+                            <td>@item.Visitante.Nome</td>
+                            <td>@item.Data.ToLongTimeString()</td>
+                            <td>
+                                <a class="btn btn-primary" href="/Guarita/Entradas/Details/@item.EntradasSaidasId"><i class="fa fa-list"></i></a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />

@@ -1,0 +1,78 @@
+﻿@model GuaritaVisitantes.DTO.Models.SaidasEntradasDTO
+
+@{
+    ViewBag.Title = "Editar Saida";
+}
+
+<style>
+    .validation-summary-errors ul {
+        list-style-position: inside;
+    }
+</style>
+
+<div class="card">
+
+    <div class="card-title">
+        @ViewBag.Title
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("Edit", "Saidas", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data", id = "FormEdtSaida" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="card-body-item">
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+            </div>
+
+            @Html.HiddenFor(m => m.SaidaEntradaId)
+            @Html.HiddenFor(m => m.Tipo)
+            @Html.HiddenFor(m => m.Data)
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.KM, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.KM, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.KM, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.Observacoes, new { @class = "control-label" })
+                <textarea class="form-control" name="Observacoes" id="Observacoes"></textarea>
+                @Html.ValidationMessageFor(model => model.Observacoes, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.VeiculoId, new { @class = "control-label" })
+                <select class="form-control select-veiculo" name="VeiculoId" id="VeiculoId" style="width: 100%;">
+                    <option></option>
+                </select>
+                @Html.ValidationMessageFor(model => model.VeiculoId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.MotoristaId, new { @class = "control-label" })
+                <select class="form-control select-motorista" name="MotoristaId" id="MotoristaId" style="width: 100%;">
+                    <option></option>
+                </select>
+                @Html.ValidationMessageFor(model => model.MotoristaId, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.HiddenFor(m => m.UserId)
+        }
+    </div>
+    <div class="card-footer">
+        <input id="btnEdtSaida" type="button" class="btn btn-success" value="Salvar" />
+    </div>
+
+</div>
+
+<script>
+    let txtObservacoes = document.getElementById('Observacoes');
+    txtObservacoes.value = '@Model.Observacoes';
+    var veiculoId = '@Model.VeiculoId';
+    var motoristaId = '@Model.MotoristaId';
+
+    let btnEdtSaida = document.getElementById('btnEdtSaida');
+    btnEdtSaida.onclick = () => {
+        document.getElementById('FormEdtSaida').submit();
+    }
+</script>
+

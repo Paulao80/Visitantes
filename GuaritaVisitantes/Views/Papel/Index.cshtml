@@ -1,0 +1,187 @@
+﻿
+@{
+    ViewBag.Title = "Gerenciar Papéis";
+}
+
+<div class="card">
+    <div class="card-title">
+        Listagem de Papel
+    </div>
+
+    <div class="card-body">
+
+        <table class="tabela">
+            @foreach (var role in ViewBag.Roles)
+            {
+                <tr>
+                    <td class="">
+                        <strong>@role.Text </strong>
+                    </td>
+                    <td class="">
+                        <span onclick="return confirm('Tem certeza que deseja excluir?')"><a href="/Papel/Delete?RoleName=@role.Text" class="delLink" style="color:red;">Excluir</a></span>
+                        @*@Html.ActionLink("Edit", "Edit", new { roleName = @role.Text })*@
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>
+
+    <div class="card-footer">
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-title">
+        Adicionar Papel
+    </div>
+
+    <div class="card-body">
+
+        @*@using (Html.BeginForm("Create", "Papel", new { @class = "form-horizontal", id = "formAddPapel" }))*@
+        @using (Html.BeginForm("Create", "Papel", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "formAddPapel" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div class="card-body-item">
+                <label class="control-label">Papel Nome</label>
+                <input type="text" id="RoleName" name="RoleName" class="form-control" />
+            </div>
+        }
+
+    </div>
+
+    <div class="card-footer">
+        <input type="button" id="btnAdd" value="Salvar" class="btn btn-success" />
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-title">
+        Adicionar Papel ao Usuário
+    </div>
+
+    <div class="card-body">
+
+        @using (Html.BeginForm("RoleAddToUser", "Papel", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "formAddPapelUser" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div class="card-body-item">
+                <label class="control-label">Usuário Nome</label>
+                @Html.DropDownList("UserName", (IEnumerable<SelectListItem>)ViewBag.Users, "Select o Usuário", new { @class = "form-control" })
+            </div>
+
+            <div class="card-body-item">
+                <label class="control-label">Papel Nome</label>
+                @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select o Papel", new { @class = "form-control" })
+            </div>
+        }
+
+    </div>
+
+    <div class="card-footer">
+        <input type="button" id="btnAddPapelUser" value="Salvar" class="btn btn-success" />
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-title">
+        Listar Papel do Usuário
+    </div>
+
+    <div class="card-body">
+
+        @using (Html.BeginForm("GetRoles", "Papel", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "formRecPapalUser" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="card-body-item">
+                <label class="control-label">Nome Usuário</label>
+                @Html.DropDownList("UserName", (IEnumerable<SelectListItem>)ViewBag.Users, "Select o Usuário", new { @class = "form-control" })
+            </div>
+        }
+
+        <div class="card-body-item">
+            @if (ViewBag.RolesForThisUser != null)
+            {
+                <div class="alert-info">
+                    <strong>Papeis para este usuário</strong>
+                    <ol>
+                        @foreach (string s in ViewBag.RolesForThisUser)
+                        {
+                            <li>@s</li>
+                        }
+                    </ol>
+                </div>
+            }
+        </div>
+
+    </div>
+
+    <div class="card-footer">
+        <input type="button" id="btnRecPapelUser" value="Receber" class="btn btn-success" />
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-title">
+        Remover Papel do Usuário
+    </div>
+
+    <div class="card-body">
+        @using (Html.BeginForm("DeleteRoleForUser", "Papel", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "formRemPapelUser" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div class="card-body-item">
+                <label class="control-label">Nome Usuário</label>
+                @Html.DropDownList("UserName", (IEnumerable<SelectListItem>)ViewBag.Users, "Select o Usuário", new { @class = "form-control" })
+            </div>
+
+            <div class="card-body-item">
+                <label class="control-label">Papel Nome</label>
+                @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select o Papel", new { @class = "form-control" })
+            </div>
+        }
+    </div>
+
+    <div class="card-footer">
+        <input type="button" id="btnRemPapelUser" value="Remover" class="btn btn-success" />
+    </div>
+</div>
+
+<div class="toast-message">
+    @ViewBag.Message
+</div>
+
+<br />
+<br />
+<br />
+<br />
+
+<script>
+    let btnAdd = document.getElementById('btnAdd');
+    btnAdd.onclick = () => {
+        document.getElementById('formAddPapel').submit();
+    }
+
+    let btnAddPapelUser = document.getElementById('btnAddPapelUser');
+    btnAddPapelUser.onclick = () => {
+        document.getElementById('formAddPapelUser').submit();
+    }
+
+    let btnRecPapelUser = document.getElementById('btnRecPapelUser');
+    btnRecPapelUser.onclick = () => {
+        document.getElementById('formRecPapalUser').submit();
+    }
+
+    let btnRemPapelUser = document.getElementById('btnRemPapelUser');
+    btnRemPapelUser.onclick = () => {
+        document.getElementById('formRemPapelUser').submit();
+    }
+</script>
+

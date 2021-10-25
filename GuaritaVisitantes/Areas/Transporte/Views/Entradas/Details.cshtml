@@ -1,0 +1,64 @@
+﻿@model GuaritaVisitantes.DTO.Models.SaidasEntradasDTO
+
+@{
+    ViewBag.Title = "Detalhes da Entrada";
+}
+
+<div class="card">
+    <div class="card-title">
+        @ViewBag.Title
+    </div>
+    <div class="card-body">
+        <div class="card-body-item">
+            @Html.Label("Id da Entrada", new { @class = "control-label" }):
+            @Html.DisplayFor(m => m.SaidaEntradaId)
+        </div>
+
+        <div class="card-body-item">
+            @Html.LabelFor(m => m.Tipo, new { @class = "control-label" }):
+            @Html.DisplayFor(m => m.Tipo)
+        </div>
+
+        <div class="card-body-item">
+            @Html.LabelFor(m => m.Data, new { @class = "control-label" }):
+            @Html.DisplayFor(m => m.Data)
+        </div>
+
+        <div class="card-body-item">
+            @Html.LabelFor(m => m.KM, new { @class = "control-label" }):
+            @Html.DisplayFor(m => m.KM)
+        </div>
+
+        <div class="card-body-item">
+            @Html.LabelFor(m => m.Observacoes, new { @class = "control-label" }):
+            @Html.DisplayFor(m => m.Observacoes)
+        </div>
+
+        @{ 
+            var veiculo = Model.Veiculo.Placa + " - " + Model.Veiculo.Descricao;
+        }
+
+        <div class="card-body-item">
+            @Html.LabelFor(m => m.VeiculoId, new { @class = "control-label" }):
+            @veiculo
+        </div>
+
+        <div class="card-body-item">
+            @Html.LabelFor(m => m.MotoristaId, new { @class = "control-label" }):
+            @Html.DisplayFor(m => m.Motorista.Nome)
+        </div>
+
+        <div class="card-body-item">
+            @Html.LabelFor(m => m.SaidaId, new { @class = "control-label" }):
+            @Html.DisplayFor(m => m.SaidaId)
+        </div>
+
+        <div class="card-body-item">
+            @Html.LabelFor(m => m.UserId, new { @class = "control-label" }):
+            @ViewBag.Usuario
+        </div>
+    </div>
+    <div class="card-footer">
+    </div>
+</div>
+

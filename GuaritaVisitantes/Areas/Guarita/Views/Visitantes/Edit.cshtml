@@ -1,0 +1,141 @@
+﻿@model GuaritaVisitantes.DTO.Models.VisitanteDTO
+
+@{
+    ViewBag.Title = "Editar Visitante";
+}
+
+<style>
+    .card-body-item .capturar #video-foto{
+        width: calc(50% - 4px);
+        border: 3px solid black;
+        border-radius: 5px;
+    }
+
+    .card-body-item .capturar #canvas-foto {
+        width: calc(50% - 4px);
+        border-radius: 5px;
+    }
+
+    .btns-visitante {
+        width: calc(50% - 4px);
+        background-color: orangered;
+        border: none;
+        padding: 5px;
+        color: white;
+        border-radius: 5px;
+        display: inline-block;
+    }
+</style>
+
+<div class="card">
+    <div class="card-title">
+        @ViewBag.Title
+    </div>
+
+    <div class="card-body">
+        @using (Html.BeginForm("Edit", "Visitantes", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data", id = "FormEdtVisitante" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="card-body-item">
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+            </div>
+
+            @Html.HiddenFor(m => m.VisitanteId)
+            @Html.HiddenFor(m => m.IdUser)
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.Nome, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.Telefone, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.CnhRg, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.CnhRg, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CnhRg, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.CnhRgFile, new { @class = "control-label" })
+                @Html.HiddenFor(m => m.CnhRgPath)
+                <input class="form-control foto" id="CnhRgFile" name="CnhRgFile" type="file" accept=".jpg, .jpeg, .png" />
+                <div id="imgdiv1"></div>
+            </div>
+
+            @*<div class="card-body-item">
+                @Html.LabelFor(m => m.FotoFile, new { @class = "control-label" })
+                <input class="form-control foto" id="FotoFile" name="FotoFile" type="file" accept=".jpg, .jpeg, .png" />
+                <div id="imgdiv2"></div>
+            </div>*@
+
+            <div class="card-body-item">
+                @Html.LabelFor(m => m.FotoPath, new { @class = "control-label" })
+                @Html.HiddenFor(m => m.FotoPath)
+                <div class="capturar">
+                    <video id="video-foto"></video>
+                    <canvas id='canvas-foto'></canvas>
+                </div>
+            </div>
+
+            <div class="card-body-item">
+                <input class="btns-visitante" type="button" id="btnCapturar" value="Capturar" />
+                <input class="btns-visitante" style="display: none;" type="button" id="btnUpload" value="Upload" />
+            </div>
+        }
+    </div>
+
+    <div class="card-footer">
+        <input id="btnEdtVisitante" type="button" class="btn btn-success" value="Salvar" />
+    </div>
+</div>
+
+<script src="~/Scripts/visitante.js"></script>
+<script>
+    let btnEdtVisitante = document.getElementById('btnEdtVisitante');
+    btnEdtVisitante.onclick = () => {
+        document.getElementById('FormEdtVisitante').submit();
+    }
+
+    if (FotoPath.value !== '' && FotoPath.value !== null && FotoPath.value !== undefined) {
+        canvas.style.border = '3px solid black';
+        let ctx = canvas.getContext('2d');
+        let imgFotoPath = document.createElement('img');
+        imgFotoPath.src = '@GuaritaVisitantes.Util.Converter.FileToData(Model.FotoPath)';
+        imgFotoPath.id = 'imgFotoPath'
+        canvas.height = imgFotoPath.height;
+        canvas.width = imgFotoPath.width;
+        ctx.drawImage(imgFotoPath, 0, 0);
+    }
+
+    const addPhoto1 = (div,src,title) => {
+        div.innerHTML = '';
+        div.setAttribute('class', '');
+        div.style.marginTop = '10px';
+        div.style.backgroundColor = '#e1e1e1';
+        div.style.border = '2px solid #4a4a4a';
+        div.style.textAlign = 'center';
+
+        let img = document.createElement('img');
+        img.setAttribute('id', 'fotoimg');
+        img.setAttribute('name', 'fotoimg');
+        img.style.width = '120px';
+
+        img.title = title;
+
+        img.src = src;
+
+        div.append(img);
+    }
+
+    let divimg = document.getElementById('imgdiv1');
+
+    let imgsrc = '@GuaritaVisitantes.Util.Converter.FileToData(Model.CnhRgPath)';
+
+    addPhoto1(divimg, imgsrc, 'CNH/RG Imagem');
+</script>
